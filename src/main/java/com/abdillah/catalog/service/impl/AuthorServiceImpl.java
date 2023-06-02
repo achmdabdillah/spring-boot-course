@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.abdillah.catalog.domain.Author;
@@ -25,7 +26,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public AuthorResponseDTO findAuthorById(Long id) {
         // 1. fetch data from database
-        Author author = authorRepository.findById(id)
+        Author author = authorRepository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new BadRequestException("Invalid authorId"));
         // 2. transfrom Author to authorResponseDto
         AuthorResponseDTO dto = new AuthorResponseDTO();
@@ -48,7 +49,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void updateAuthor(Long authorId, AuthorUpdateRequestDto dto) {
-        Author author = authorRepository.findById(authorId)
+        Author author = authorRepository.findByIdAndDeletedFalse(authorId)
                 .orElseThrow(() -> new BadRequestException("Invalid authorId"));
         author.setName(dto.getAuthorName() == null ? author.getName() : dto.getAuthorName());
         author.setBirthDate(
@@ -59,7 +60,11 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void deleteAuthor(Long authorId) {
-        authorRepository.deleteById(authorId);
+        Author author = authorRepository.findByIdAndDeletedFalse(authorId)
+                .orElseThrow(() -> new BadRequestException("invalid.authorId"));
+
+        author.setDeleted(Boolean.TRUE);
+        authorRepository.save(author);
     }
 
 }
