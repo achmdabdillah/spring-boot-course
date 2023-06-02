@@ -11,4 +11,6 @@ public interface AuthorService {
     public void createNewAuthor(List<AuthorCreateRequestDto> dto);
 
     public void updateAuthor(Long authorId, AuthorUpdateRequestDto dto);
+
+    public void deleteAuthor(Long authorId);
 }
