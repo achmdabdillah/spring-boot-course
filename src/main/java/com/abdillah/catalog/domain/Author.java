@@ -39,4 +39,7 @@ public class Author {
 
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
+
+    @Column(name = "deleted", columnDefinition = "boolean default false")
+    private Boolean deleted;
 }
