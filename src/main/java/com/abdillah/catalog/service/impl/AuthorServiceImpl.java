@@ -26,7 +26,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public AuthorResponseDTO findAuthorById(Long id) {
         // 1. fetch data from database
-        Author author = authorRepository.findByIdAndDeletedFalse(id)
+        Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Invalid authorId"));
         // 2. transfrom Author to authorResponseDto
         AuthorResponseDTO dto = new AuthorResponseDTO();
@@ -49,7 +49,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void updateAuthor(Long authorId, AuthorUpdateRequestDto dto) {
-        Author author = authorRepository.findByIdAndDeletedFalse(authorId)
+        Author author = authorRepository.findById(authorId)
                 .orElseThrow(() -> new BadRequestException("Invalid authorId"));
         author.setName(dto.getAuthorName() == null ? author.getName() : dto.getAuthorName());
         author.setBirthDate(
@@ -60,11 +60,13 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void deleteAuthor(Long authorId) {
-        Author author = authorRepository.findByIdAndDeletedFalse(authorId)
-                .orElseThrow(() -> new BadRequestException("invalid.authorId"));
+        authorRepository.deleteById(authorId);
 
-        author.setDeleted(Boolean.TRUE);
-        authorRepository.save(author);
+        // Author author = authorRepository.findByIdAndDeletedFalse(authorId)
+        // .orElseThrow(() -> new BadRequestException("invalid.authorId"));
+
+        // author.setDeleted(Boolean.TRUE);
+        // authorRepository.save(author);
     }
 
 }
