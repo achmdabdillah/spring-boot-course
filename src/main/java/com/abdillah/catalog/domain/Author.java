@@ -2,6 +2,8 @@ package com.abdillah.catalog.domain;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "author")
+// @DynamicUpdate
 public class Author {
 
     // GenerationType.IDENTITY
