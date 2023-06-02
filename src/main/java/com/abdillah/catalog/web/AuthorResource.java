@@ -1,6 +1,7 @@
 package com.abdillah.catalog.web;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -31,8 +32,8 @@ public class AuthorResource {
 
     // Insert new author
     @PostMapping("/author")
-    public ResponseEntity<Void> createNewAuthor(@RequestBody @Valid AuthorCreateRequestDto dto) {
-        authorService.createNewAuthor(dto);
+    public ResponseEntity<Void> createNewAuthor(@RequestBody @Valid List<AuthorCreateRequestDto> dtos) {
+        authorService.createNewAuthor(dtos);
         return ResponseEntity.created(URI.create("/author")).build();
     }
 }

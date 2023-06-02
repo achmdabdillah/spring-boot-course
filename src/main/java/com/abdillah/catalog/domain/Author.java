@@ -19,8 +19,16 @@ import lombok.NoArgsConstructor;
 @Table(name = "author")
 public class Author {
 
+    // GenerationType.IDENTITY
+    // PROS: only need 1 routing to database per insert
+    // CONS: batch insert disabled, needs stored procedure to do batch insert
+
+    // GenerationType.SEQUENCE
+    // PROS: batch insert enabled
+    // CONS: need 2 routing to database per insert
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "author_name", nullable = false)

@@ -1,6 +1,8 @@
 package com.abdillah.catalog.service.impl;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,6 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public AuthorResponseDTO findAuthorById(Long id) {
-        // TODO
         // 1. fetch data from database
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Invalid authorId"));
@@ -33,14 +34,15 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void createNewAuthor(AuthorCreateRequestDto dto) {
-        // TODO Auto-generated method stub
-        Author author = new Author();
+    public void createNewAuthor(List<AuthorCreateRequestDto> dtos) {
+        List<Author> authors = dtos.stream().map((dto) -> {
+            Author author = new Author();
+            author.setName(dto.getAuthorName());
+            author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
+            return author;
+        }).collect(Collectors.toList());
 
-        author.setName(dto.getAuthorName());
-        author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
-
-        authorRepository.save(author);
+        authorRepository.saveAll(authors);
     }
 
 }
