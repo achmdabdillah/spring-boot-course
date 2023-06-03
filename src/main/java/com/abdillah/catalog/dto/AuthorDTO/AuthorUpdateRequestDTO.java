@@ -1,4 +1,4 @@
-package com.abdillah.catalog.dto;
+package com.abdillah.catalog.dto.AuthorDTO;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -7,11 +7,9 @@ import lombok.Data;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Data
-public class BookUpdateRequestDTO {
+public class AuthorUpdateRequestDTO {
 
     private String authorName;
 
-    private String booktitle;
-
-    private String description;
+    private Long birthDate;
 }

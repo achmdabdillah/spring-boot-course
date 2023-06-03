@@ -2,9 +2,9 @@ package com.abdillah.catalog.service;
 
 import java.util.List;
 
-import com.abdillah.catalog.dto.BookCreateDTO;
-import com.abdillah.catalog.dto.BookDetailDTO;
-import com.abdillah.catalog.dto.BookUpdateRequestDTO;
+import com.abdillah.catalog.dto.BookDTO.BookCreateDTO;
+import com.abdillah.catalog.dto.BookDTO.BookDetailDTO;
+import com.abdillah.catalog.dto.BookDTO.BookUpdateRequestDTO;
 
 public interface BookService {
     public BookDetailDTO findBookDetailById(Long bookId);

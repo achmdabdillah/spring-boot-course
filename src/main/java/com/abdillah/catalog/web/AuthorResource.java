@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abdillah.catalog.dto.AuthorCreateRequestDTO;
-import com.abdillah.catalog.dto.AuthorResponseDTO;
-import com.abdillah.catalog.dto.AuthorUpdateRequestDTO;
+import com.abdillah.catalog.dto.AuthorDTO.AuthorCreateRequestDTO;
+import com.abdillah.catalog.dto.AuthorDTO.AuthorResponseDTO;
+import com.abdillah.catalog.dto.AuthorDTO.AuthorUpdateRequestDTO;
 import com.abdillah.catalog.service.AuthorService;
 
 import jakarta.validation.Valid;

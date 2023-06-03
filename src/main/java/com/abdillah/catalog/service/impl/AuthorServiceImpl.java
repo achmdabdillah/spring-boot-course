@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.abdillah.catalog.domain.Author;
-import com.abdillah.catalog.dto.AuthorCreateRequestDTO;
-import com.abdillah.catalog.dto.AuthorResponseDTO;
-import com.abdillah.catalog.dto.AuthorUpdateRequestDTO;
+import com.abdillah.catalog.dto.AuthorDTO.AuthorCreateRequestDTO;
+import com.abdillah.catalog.dto.AuthorDTO.AuthorResponseDTO;
+import com.abdillah.catalog.dto.AuthorDTO.AuthorUpdateRequestDTO;
 import com.abdillah.catalog.exception.BadRequestException;
 import com.abdillah.catalog.repository.AuthorRepository;
 import com.abdillah.catalog.service.AuthorService;

@@ -1,4 +1,4 @@
-package com.abdillah.catalog.dto;
+package com.abdillah.catalog.dto.AuthorDTO;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

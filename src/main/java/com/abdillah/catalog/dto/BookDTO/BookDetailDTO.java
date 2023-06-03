@@ -1,4 +1,4 @@
-package com.abdillah.catalog.dto;
+package com.abdillah.catalog.dto.BookDTO;
 
 import java.io.Serializable;
 

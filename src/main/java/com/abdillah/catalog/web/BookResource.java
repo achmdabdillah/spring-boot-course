@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abdillah.catalog.dto.BookDetailDTO;
+import com.abdillah.catalog.dto.BookDTO.BookDetailDTO;
 import com.abdillah.catalog.service.BookService;
 
 import lombok.AllArgsConstructor;

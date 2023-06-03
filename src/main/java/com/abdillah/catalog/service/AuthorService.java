@@ -1,9 +1,10 @@
 package com.abdillah.catalog.service;
 
 import java.util.List;
-import com.abdillah.catalog.dto.AuthorCreateRequestDTO;
-import com.abdillah.catalog.dto.AuthorResponseDTO;
-import com.abdillah.catalog.dto.AuthorUpdateRequestDTO;
+
+import com.abdillah.catalog.dto.AuthorDTO.AuthorCreateRequestDTO;
+import com.abdillah.catalog.dto.AuthorDTO.AuthorResponseDTO;
+import com.abdillah.catalog.dto.AuthorDTO.AuthorUpdateRequestDTO;
 
 public interface AuthorService {
     public AuthorResponseDTO findAuthorById(Long id);
