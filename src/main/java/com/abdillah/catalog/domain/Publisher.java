@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "publisher")
-public class Publisher implements Serializable {
+public class Publisher extends AbstractBaseEntity {
 
     private static final long serialVersionUID = 7412127771L;
 

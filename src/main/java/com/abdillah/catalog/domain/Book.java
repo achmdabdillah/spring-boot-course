@@ -19,10 +19,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "book", indexes = {
-                @Index(name = "uk_secure_id", columnList = "secure_id")
-})
-public class Book implements Serializable {
+@Table(name = "book")
+public class Book extends AbstractBaseEntity {
 
         private static final long serialVersionUID = -5621750966L;
 
@@ -58,7 +56,4 @@ public class Book implements Serializable {
                         @JoinColumn(name = "category_code", referencedColumnName = "code")
         })
         private List<Category> categories;
-
-        @Column(name = "deleted", columnDefinition = "boolean default false")
-        private Boolean deleted;
 }

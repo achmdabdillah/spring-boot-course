@@ -3,7 +3,6 @@ package com.abdillah.catalog.domain;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -12,7 +11,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,13 +20,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "author", indexes = {
-        @Index(name = "uk_secure_id", columnList = "secure_id")
-})
+@Table(name = "author")
 // @DynamicUpdate
 @SQLDelete(sql = "UPDATE author SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")
-public class Author {
+public class Author extends AbstractBaseEntity {
 
     // GenerationType.IDENTITY
     // PROS: only need 1 routing to database per insert
@@ -50,7 +46,4 @@ public class Author {
 
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
-
-    @Column(name = "deleted", columnDefinition = "boolean default false")
-    private Boolean deleted;
 }
