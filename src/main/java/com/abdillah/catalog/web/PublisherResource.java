@@ -3,14 +3,18 @@ package com.abdillah.catalog.web;
 import java.net.URI;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abdillah.catalog.domain.Publisher;
+import com.abdillah.catalog.dto.ResultPageResponseDTO;
 import com.abdillah.catalog.dto.PublisherDTO.PublisherCreateRequestDTO;
+import com.abdillah.catalog.dto.PublisherDTO.PublisherListResponseDTO;
 import com.abdillah.catalog.dto.PublisherDTO.PublisherUpdateRequestDTO;
 import com.abdillah.catalog.service.PublisherService;
 
@@ -36,5 +40,16 @@ public class PublisherResource {
         publisherService.updatePublisher(publisherId, dto);
         return ResponseEntity.ok().build();
         // authorService.updateAuthor(authorId, dto);
+    }
+
+    @GetMapping("/v1/publisher")
+    public ResponseEntity<ResultPageResponseDTO<PublisherListResponseDTO>> findPublisherList(
+            @RequestParam(name = "pages", required = true, defaultValue = "0") Integer pages,
+            @RequestParam(name = "limit", required = true, defaultValue = "10") Integer limit,
+            @RequestParam(name = "sortBy", required = true, defaultValue = "name") String sortBy,
+            @RequestParam(name = "direction", required = true, defaultValue = "asc") String direction,
+            @RequestParam(name = "publisherName", required = false) String publisherName) {
+        return ResponseEntity.ok()
+                .body(publisherService.findPublisherList(pages, limit, sortBy, direction, publisherName));
     }
 }
