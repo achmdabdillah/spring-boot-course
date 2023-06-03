@@ -7,7 +7,7 @@ import lombok.Data;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Data
-public class BookUpdateRequestDto {
+public class BookUpdateRequestDTO {
 
     private String authorName;
 

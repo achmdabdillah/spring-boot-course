@@ -3,15 +3,13 @@ package com.abdillah.catalog.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.abdillah.catalog.domain.Author;
 import com.abdillah.catalog.domain.Book;
-import com.abdillah.catalog.dto.BookCreateDto;
-import com.abdillah.catalog.dto.BookDetailDto;
-import com.abdillah.catalog.dto.BookUpdateRequestDto;
+import com.abdillah.catalog.dto.BookCreateDTO;
+import com.abdillah.catalog.dto.BookDetailDTO;
+import com.abdillah.catalog.dto.BookUpdateRequestDTO;
 import com.abdillah.catalog.exception.BadRequestException;
 import com.abdillah.catalog.repository.BookRepository;
 import com.abdillah.catalog.service.BookService;
@@ -27,9 +25,9 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
     @Override
-    public BookDetailDto findBookDetailById(Long bookId) {
+    public BookDetailDTO findBookDetailById(Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new BadRequestException("book_id.invalid"));
-        BookDetailDto dto = new BookDetailDto();
+        BookDetailDTO dto = new BookDetailDTO();
         dto.setBookId(book.getId());
         // dto.setAuthorName(book.getAuthor().getName());
         dto.setBookTitle(book.getTitle());
@@ -39,10 +37,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDetailDto> findBookListDetail() {
+    public List<BookDetailDTO> findBookListDetail() {
         List<Book> books = bookRepository.findAll();
         return books.stream().map((book) -> {
-            BookDetailDto dto = new BookDetailDto();
+            BookDetailDTO dto = new BookDetailDTO();
             // dto.setAuthorName(book.getAuthor().getName());
             dto.setBookDescription(book.getDescription());
             dto.setBookId(book.getId());
@@ -52,7 +50,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void createNewBook(BookCreateDto dto) {
+    public void createNewBook(BookCreateDTO dto) {
         Author author = new Author();
         author.setName(dto.getAuthorName());
 
@@ -64,7 +62,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void updateBook(Long bookId, BookUpdateRequestDto dto) {
+    public void updateBook(Long bookId, BookUpdateRequestDTO dto) {
         // get book from repository
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new BadRequestException("book_id.invalid"));
         // update

@@ -9,7 +9,7 @@ import lombok.Data;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Data
-public class AuthorCreateRequestDto {
+public class AuthorCreateRequestDTO {
 
     @NotBlank
     private String authorName;

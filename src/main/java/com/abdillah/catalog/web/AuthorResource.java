@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abdillah.catalog.dto.AuthorCreateRequestDto;
+import com.abdillah.catalog.dto.AuthorCreateRequestDTO;
 import com.abdillah.catalog.dto.AuthorResponseDTO;
-import com.abdillah.catalog.dto.AuthorUpdateRequestDto;
+import com.abdillah.catalog.dto.AuthorUpdateRequestDTO;
 import com.abdillah.catalog.service.AuthorService;
 
 import jakarta.validation.Valid;
@@ -35,14 +34,14 @@ public class AuthorResource {
 
     // Insert new author
     @PostMapping("/author")
-    public ResponseEntity<Void> createNewAuthor(@RequestBody @Valid List<AuthorCreateRequestDto> dtos) {
+    public ResponseEntity<Void> createNewAuthor(@RequestBody @Valid List<AuthorCreateRequestDTO> dtos) {
         authorService.createNewAuthor(dtos);
         return ResponseEntity.created(URI.create("/author")).build();
     }
 
     // Update author
     @PutMapping("/author/{authorId}")
-    public ResponseEntity<Void> updateAuthor(@PathVariable Long authorId, @RequestBody AuthorUpdateRequestDto dto) {
+    public ResponseEntity<Void> updateAuthor(@PathVariable Long authorId, @RequestBody AuthorUpdateRequestDTO dto) {
         authorService.updateAuthor(authorId, dto);
         return ResponseEntity.ok().build();
     }

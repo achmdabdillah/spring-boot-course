@@ -4,13 +4,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.abdillah.catalog.domain.Author;
-import com.abdillah.catalog.dto.AuthorCreateRequestDto;
+import com.abdillah.catalog.dto.AuthorCreateRequestDTO;
 import com.abdillah.catalog.dto.AuthorResponseDTO;
-import com.abdillah.catalog.dto.AuthorUpdateRequestDto;
+import com.abdillah.catalog.dto.AuthorUpdateRequestDTO;
 import com.abdillah.catalog.exception.BadRequestException;
 import com.abdillah.catalog.repository.AuthorRepository;
 import com.abdillah.catalog.service.AuthorService;
@@ -36,7 +35,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void createNewAuthor(List<AuthorCreateRequestDto> dtos) {
+    public void createNewAuthor(List<AuthorCreateRequestDTO> dtos) {
         List<Author> authors = dtos.stream().map((dto) -> {
             Author author = new Author();
             author.setName(dto.getAuthorName());
@@ -48,7 +47,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void updateAuthor(Long authorId, AuthorUpdateRequestDto dto) {
+    public void updateAuthor(Long authorId, AuthorUpdateRequestDTO dto) {
         Author author = authorRepository.findById(authorId)
                 .orElseThrow(() -> new BadRequestException("Invalid authorId"));
         author.setName(dto.getAuthorName() == null ? author.getName() : dto.getAuthorName());
