@@ -17,6 +17,8 @@ import lombok.Data;
 @Table(name = "book_detail")
 public class BookDetail implements Serializable {
 
+    private static final long serialVersionUID = -9987777288L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

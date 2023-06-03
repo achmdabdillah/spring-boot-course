@@ -17,6 +17,8 @@ import lombok.Data;
 @Table(name = "publisher")
 public class Publisher implements Serializable {
 
+    private static final long serialVersionUID = 7412127771L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
