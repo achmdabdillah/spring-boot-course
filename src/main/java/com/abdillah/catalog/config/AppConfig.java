@@ -14,43 +14,43 @@ import com.abdillah.catalog.repository.impl.BookRepositoryImpl;
 @Configuration
 public class AppConfig {
 
-    @Bean
-    public Author author() {
-        return new Author(1L, "Pramoedya Ananta Toer", null, false);
-    }
+    // @Bean
+    // public Author author() {
+    // return new Author(1L, "Pramoedya Ananta Toer", null, false);
+    // }
 
-    @Bean
-    public Book book1() {
-        Book book1 = new Book();
-        book1.setId(1L);
-        book1.setTitle("Bumi Manusia");
-        book1.setDescription("Bumi Manusia adalah karya pramoedya");
-        book1.setAuthor(author());
+    // @Bean
+    // public Book book1() {
+    // Book book1 = new Book();
+    // book1.setId(1L);
+    // book1.setTitle("Bumi Manusia");
+    // book1.setDescription("Bumi Manusia adalah karya pramoedya");
+    // book1.setAuthor(author());
 
-        return book1;
-    }
+    // return book1;
+    // }
 
-    @Bean
-    public Book book2() {
-        Book book2 = new Book();
-        book2.setId(2L);
-        book2.setTitle("Arok Dedes");
-        book2.setDescription("Arok Dedes adalah karya pramoedya");
-        book2.setAuthor(author());
+    // @Bean
+    // public Book book2() {
+    // Book book2 = new Book();
+    // book2.setId(2L);
+    // book2.setTitle("Arok Dedes");
+    // book2.setDescription("Arok Dedes adalah karya pramoedya");
+    // book2.setAuthor(author());
 
-        return book2;
-    }
+    // return book2;
+    // }
 
-    @Bean
-    public BookRepository bookRepository(Book book1, Book book2) {
-        Map<Long, Book> bookMap = new HashMap<Long, Book>();
-        bookMap.put(1L, book1);
-        bookMap.put(2L, book2);
+    // @Bean
+    // public BookRepository bookRepository(Book book1, Book book2) {
+    // Map<Long, Book> bookMap = new HashMap<Long, Book>();
+    // bookMap.put(1L, book1);
+    // bookMap.put(2L, book2);
 
-        BookRepositoryImpl bookRepository = new BookRepositoryImpl();
+    // BookRepositoryImpl bookRepository = new BookRepositoryImpl();
 
-        bookRepository.setBookMap(bookMap);
+    // bookRepository.setBookMap(bookMap);
 
-        return bookRepository;
-    }
+    // return bookRepository;
+    // }
 }
