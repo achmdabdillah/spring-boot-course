@@ -1,6 +1,7 @@
 package com.abdillah.catalog.domain;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
@@ -11,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +22,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "author")
+@Table(name = "author", indexes = {
+        @Index(name = "uk_secure_id", columnList = "secure_id")
+})
 // @DynamicUpdate
 @SQLDelete(sql = "UPDATE author SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")
@@ -37,6 +41,9 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @Column(name = "secure_id", nullable = false, unique = true)
+    private String secureId = UUID.randomUUID().toString();
 
     @Column(name = "author_name", nullable = false)
     private String name;
