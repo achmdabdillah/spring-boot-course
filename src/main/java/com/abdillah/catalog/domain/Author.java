@@ -1,7 +1,6 @@
 package com.abdillah.catalog.domain;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;

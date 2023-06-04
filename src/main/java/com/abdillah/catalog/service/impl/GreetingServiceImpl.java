@@ -2,7 +2,6 @@ package com.abdillah.catalog.service.impl;
 
 import java.util.TimeZone;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.abdillah.catalog.config.ApplicationProperties;
