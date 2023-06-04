@@ -10,7 +10,7 @@ import com.abdillah.catalog.domain.Book;
 import com.abdillah.catalog.domain.Category;
 import com.abdillah.catalog.domain.Publisher;
 import com.abdillah.catalog.dto.BookDTO.BookCreateRequestDTO;
-import com.abdillah.catalog.dto.BookDTO.BookDetailDTO;
+import com.abdillah.catalog.dto.BookDTO.BookDetailResponseDTO;
 import com.abdillah.catalog.dto.BookDTO.BookUpdateRequestDTO;
 import com.abdillah.catalog.exception.BadRequestException;
 import com.abdillah.catalog.repository.BookRepository;
@@ -33,9 +33,9 @@ public class BookServiceImpl implements BookService {
     private final PublisherService publisherService;
 
     @Override
-    public BookDetailDTO findBookDetailById(Long bookId) {
-        Book book = bookRepository.findById(bookId).orElseThrow(() -> new BadRequestException("book_id.invalid"));
-        BookDetailDTO dto = new BookDetailDTO();
+    public BookDetailResponseDTO findBookDetailById(Long bookId) {
+        Book book = bookRepository.findBySecureId(bookId).orElseThrow(() -> new BadRequestException("book_id.invalid"));
+        BookDetailResponseDTO dto = new BookDetailResponseDTO();
         dto.setBookId(book.getId());
         // dto.setAuthorName(book.getAuthor().getName());
         dto.setBookTitle(book.getTitle());
@@ -45,10 +45,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDetailDTO> findBookListDetail() {
+    public List<BookDetailResponseDTO> findBookListDetail() {
         List<Book> books = bookRepository.findAll();
         return books.stream().map((book) -> {
-            BookDetailDTO dto = new BookDetailDTO();
+            BookDetailResponseDTO dto = new BookDetailResponseDTO();
             // dto.setAuthorName(book.getAuthor().getName());
             dto.setBookDescription(book.getDescription());
             dto.setBookId(book.getId());
@@ -76,7 +76,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void updateBook(Long bookId, BookUpdateRequestDTO dto) {
         // get book from repository
-        Book book = bookRepository.findById(bookId).orElseThrow(() -> new BadRequestException("book_id.invalid"));
+        Book book = bookRepository.findBySecureId(bookId).orElseThrow(() -> new BadRequestException("book_id.invalid"));
         // update
         book.setTitle(dto.getBooktitle());
         book.setDescription(dto.getDescription());
@@ -86,7 +86,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteBook(Long bookId) {
-        bookRepository.deleteById(bookId);
+        Book book = bookRepository.findBySecureId(bookId).orElseThrow(() -> new BadRequestException("book_id.invalid"));
+        bookRepository.delete(book);
     }
 
     // public BookRepository getBookRepository() {

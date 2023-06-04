@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abdillah.catalog.dto.BookDTO.BookCreateRequestDTO;
-import com.abdillah.catalog.dto.BookDTO.BookDetailDTO;
+import com.abdillah.catalog.dto.BookDTO.BookDetailResponseDTO;
 import com.abdillah.catalog.service.BookService;
 
 import lombok.AllArgsConstructor;
@@ -25,12 +25,12 @@ public class BookResource {
     private final BookService bookService;
 
     @GetMapping("/v1/book/{bookId}")
-    public BookDetailDTO findBookDetail(@PathVariable("bookId") Long id) {
+    public BookDetailResponseDTO findBookDetail(@PathVariable("bookId") Long id) {
         StopWatch stopWatch = new StopWatch();
 
         log.info("START findBookDetail {}", id);
         stopWatch.start();
-        BookDetailDTO result = bookService.findBookDetailById(id);
+        BookDetailResponseDTO result = bookService.findBookDetailById(id);
         log.info("FINISH findBookDetail. execution time = {}", stopWatch.getTotalTimeMillis());
 
         return result;
