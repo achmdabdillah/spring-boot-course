@@ -73,4 +73,12 @@ public class PublisherServiceImpl implements PublisherService {
 
         return PaginationUtil.createResultPageDTO(dtos, pageResult.getTotalElements(), pageResult.getTotalPages());
     }
+
+    @Override
+    public Publisher findPublisher(String publisherId) {
+        Publisher publisher = publisherRepository.findBySecureId(publisherId)
+                .orElseThrow(() -> new BadRequestException("invalid.publisherId"));
+
+        return publisher;
+    }
 }

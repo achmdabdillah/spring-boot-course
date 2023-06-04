@@ -7,12 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.abdillah.catalog.domain.Author;
 import com.abdillah.catalog.domain.Book;
-import com.abdillah.catalog.dto.BookDTO.BookCreateDTO;
+import com.abdillah.catalog.domain.Category;
+import com.abdillah.catalog.domain.Publisher;
+import com.abdillah.catalog.dto.BookDTO.BookCreateRequestDTO;
 import com.abdillah.catalog.dto.BookDTO.BookDetailDTO;
 import com.abdillah.catalog.dto.BookDTO.BookUpdateRequestDTO;
 import com.abdillah.catalog.exception.BadRequestException;
 import com.abdillah.catalog.repository.BookRepository;
+import com.abdillah.catalog.service.AuthorService;
 import com.abdillah.catalog.service.BookService;
+import com.abdillah.catalog.service.CategoryService;
+import com.abdillah.catalog.service.PublisherService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    private final AuthorService authorService;
+    private final CategoryService categoryService;
+    private final PublisherService publisherService;
 
     @Override
     public BookDetailDTO findBookDetailById(Long bookId) {
@@ -50,14 +58,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void createNewBook(BookCreateDTO dto) {
-        Author author = new Author();
-        author.setName(dto.getAuthorName());
+    public void createNewBook(BookCreateRequestDTO dto) {
+        List<Author> authors = authorService.findAuthors(dto.getAuthorIdList());
+        List<Category> categories = categoryService.findCategories(dto.getCategoryList());
+        Publisher publisher = publisherService.findPublisher(dto.getPublisherId());
 
         Book book = new Book();
-        // book.setAuthor(author);
-        book.setTitle(dto.getBooktitle());
+        book.setAuthors(authors);
+        book.setCategories(categories);
+        book.setPublisher(publisher);
+        book.setTitle(dto.getBookTitle());
         book.setDescription(dto.getDescription());
+
         bookRepository.save(book);
     }
 

@@ -15,6 +15,7 @@ import com.abdillah.catalog.domain.Category;
 import com.abdillah.catalog.dto.ResultPageResponseDTO;
 import com.abdillah.catalog.dto.CategoryDTO.CategoryCreateUpdateRequestDTO;
 import com.abdillah.catalog.dto.CategoryDTO.CategoryListResponseDTO;
+import com.abdillah.catalog.exception.BadRequestException;
 import com.abdillah.catalog.repository.CategoryRepository;
 import com.abdillah.catalog.service.CategoryService;
 import com.abdillah.catalog.util.PaginationUtil;
@@ -56,5 +57,14 @@ public class CategoryServiceImpl implements CategoryService {
         })).collect(Collectors.toList());
 
         return PaginationUtil.createResultPageDTO(dtos, pageResult.getTotalElements(), pageResult.getTotalPages());
+    }
+
+    @Override
+    public List<Category> findCategories(List<String> categoryCodeList) {
+        List<Category> categories = categoryRepository.findByCodeIn(categoryCodeList);
+        if (categories.isEmpty())
+            throw new BadRequestException("Category can't be empty!");
+
+        return categories;
     }
 }
