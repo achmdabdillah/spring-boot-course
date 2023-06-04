@@ -13,7 +13,7 @@ public interface BookService {
 
     public void createNewBook(BookCreateRequestDTO dto);
 
-    public void updateBook(Long bookId, BookUpdateRequestDTO dto);
+    public void updateBook(String bookId, BookUpdateRequestDTO dto);
 
-    public void deleteBook(Long bookId);
+    public void deleteBook(String bookId);
 }

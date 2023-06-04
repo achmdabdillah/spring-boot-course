@@ -14,6 +14,7 @@ import com.abdillah.catalog.domain.Publisher;
 import com.abdillah.catalog.dto.ResultPageResponseDTO;
 import com.abdillah.catalog.dto.PublisherDTO.PublisherCreateRequestDTO;
 import com.abdillah.catalog.dto.PublisherDTO.PublisherListResponseDTO;
+import com.abdillah.catalog.dto.PublisherDTO.PublisherResponseDTO;
 import com.abdillah.catalog.dto.PublisherDTO.PublisherUpdateRequestDTO;
 import com.abdillah.catalog.exception.BadRequestException;
 import com.abdillah.catalog.repository.PublisherRepository;
@@ -80,5 +81,14 @@ public class PublisherServiceImpl implements PublisherService {
                 .orElseThrow(() -> new BadRequestException("invalid.publisherId"));
 
         return publisher;
+    }
+
+    @Override
+    public PublisherResponseDTO construcDto(Publisher publisher) {
+        PublisherResponseDTO dto = new PublisherResponseDTO();
+        dto.setPublisherId(publisher.getSecureId());
+        dto.setPublisherName(publisher.getName());
+
+        return dto;
     }
 }

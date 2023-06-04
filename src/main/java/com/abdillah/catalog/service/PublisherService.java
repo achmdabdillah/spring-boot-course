@@ -4,6 +4,7 @@ import com.abdillah.catalog.domain.Publisher;
 import com.abdillah.catalog.dto.ResultPageResponseDTO;
 import com.abdillah.catalog.dto.PublisherDTO.PublisherCreateRequestDTO;
 import com.abdillah.catalog.dto.PublisherDTO.PublisherListResponseDTO;
+import com.abdillah.catalog.dto.PublisherDTO.PublisherResponseDTO;
 import com.abdillah.catalog.dto.PublisherDTO.PublisherUpdateRequestDTO;
 
 public interface PublisherService {
@@ -16,4 +17,6 @@ public interface PublisherService {
             String sortBy, String direction, String publisherName);
 
     public Publisher findPublisher(String publisherId);
+
+    public PublisherResponseDTO construcDto(Publisher publisher);
 }
