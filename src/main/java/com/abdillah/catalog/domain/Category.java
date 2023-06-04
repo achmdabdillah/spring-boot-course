@@ -13,9 +13,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "category")
-public class Category implements Serializable {
-
-    private static final long serialVersionUID = -5438873451L;
+public class Category extends AbstractBaseEntity {
 
     @Id
     @Column(name = "code", nullable = false)
