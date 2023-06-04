@@ -7,11 +7,11 @@ import com.abdillah.catalog.dto.AuthorDTO.AuthorResponseDTO;
 import com.abdillah.catalog.dto.AuthorDTO.AuthorUpdateRequestDTO;
 
 public interface AuthorService {
-    public AuthorResponseDTO findAuthorById(Long id);
+    public AuthorResponseDTO findAuthorById(String id);
 
     public void createNewAuthor(List<AuthorCreateRequestDTO> dto);
 
-    public void updateAuthor(Long authorId, AuthorUpdateRequestDTO dto);
+    public void updateAuthor(String authorId, AuthorUpdateRequestDTO dto);
 
-    public void deleteAuthor(Long authorId);
+    public void deleteAuthor(String authorId);
 }

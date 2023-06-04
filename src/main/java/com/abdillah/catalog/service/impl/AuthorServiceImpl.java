@@ -23,10 +23,10 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
 
     @Override
-    public AuthorResponseDTO findAuthorById(Long id) {
+    public AuthorResponseDTO findAuthorById(String id) {
         // 1. fetch data from database
-        Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Invalid authorId"));
+        Author author = authorRepository.findBySecureId(id)
+                .orElseThrow(() -> new BadRequestException("Invalid authorIds"));
         // 2. transfrom Author to authorResponseDto
         AuthorResponseDTO dto = new AuthorResponseDTO();
         dto.setAuthorName(author.getName());
@@ -47,8 +47,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void updateAuthor(Long authorId, AuthorUpdateRequestDTO dto) {
-        Author author = authorRepository.findById(authorId)
+    public void updateAuthor(String authorId, AuthorUpdateRequestDTO dto) {
+        Author author = authorRepository.findBySecureId(authorId)
                 .orElseThrow(() -> new BadRequestException("Invalid authorId"));
         author.setName(dto.getAuthorName() == null ? author.getName() : dto.getAuthorName());
         author.setBirthDate(
@@ -58,14 +58,12 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void deleteAuthor(Long authorId) {
-        authorRepository.deleteById(authorId);
+    public void deleteAuthor(String authorId) {
+        Author author = authorRepository.findBySecureId(authorId)
+                .orElseThrow(() -> new BadRequestException("Invalid authorId"));
 
-        // Author author = authorRepository.findByIdAndDeletedFalse(authorId)
-        // .orElseThrow(() -> new BadRequestException("invalid.authorId"));
-
-        // author.setDeleted(Boolean.TRUE);
-        // authorRepository.save(author);
+        authorRepository.delete(author);
+        // authorRepository.deleteBySecureId(authorId);
     }
 
 }

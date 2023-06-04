@@ -16,6 +16,8 @@ import lombok.Data;
 })
 public abstract class AbstractBaseEntity implements Serializable {
 
+    private static final long serialVersionUID = -1609380763L;
+
     @Column(name = "secure_id", nullable = false, unique = true)
     private String secureId = UUID.randomUUID().toString();
 

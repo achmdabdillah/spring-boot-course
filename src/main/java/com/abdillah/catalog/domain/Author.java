@@ -38,9 +38,6 @@ public class Author extends AbstractBaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "secure_id", nullable = false, unique = true)
-    private String secureId = UUID.randomUUID().toString();
-
     @Column(name = "author_name", nullable = false)
     private String name;
 
