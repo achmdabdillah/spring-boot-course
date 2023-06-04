@@ -25,15 +25,14 @@ public class BookResource {
     private final BookService bookService;
 
     @GetMapping("/v1/book/{bookId}")
-    public BookDetailResponseDTO findBookDetail(@PathVariable("bookId") Long id) {
+    public ResponseEntity<BookDetailResponseDTO> findBookDetail(@PathVariable("bookId") String id) {
         StopWatch stopWatch = new StopWatch();
 
         log.info("START findBookDetail {}", id);
         stopWatch.start();
         BookDetailResponseDTO result = bookService.findBookDetailById(id);
         log.info("FINISH findBookDetail. execution time = {}", stopWatch.getTotalTimeMillis());
-
-        return result;
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/v1/book")

@@ -33,13 +33,15 @@ public class BookServiceImpl implements BookService {
     private final PublisherService publisherService;
 
     @Override
-    public BookDetailResponseDTO findBookDetailById(Long bookId) {
+    public BookDetailResponseDTO findBookDetailById(String bookId) {
         Book book = bookRepository.findBySecureId(bookId).orElseThrow(() -> new BadRequestException("book_id.invalid"));
         BookDetailResponseDTO dto = new BookDetailResponseDTO();
-        dto.setBookId(book.getId());
-        // dto.setAuthorName(book.getAuthor().getName());
-        dto.setBookTitle(book.getTitle());
         dto.setBookDescription(book.getDescription());
+        dto.setBookId(book.getSecureId());
+        dto.setCategories(categoryService.constructDTO(book.getCategories()));
+        dto.setAuthors(authorService.constructDTO(book.getAuthors()));
+        dto.setPublisher(publisherService.construcDto(book.getPublisher()));
+        dto.setBookTitle(book.getTitle());
 
         return dto;
     }
@@ -49,9 +51,11 @@ public class BookServiceImpl implements BookService {
         List<Book> books = bookRepository.findAll();
         return books.stream().map((book) -> {
             BookDetailResponseDTO dto = new BookDetailResponseDTO();
-            // dto.setAuthorName(book.getAuthor().getName());
             dto.setBookDescription(book.getDescription());
-            dto.setBookId(book.getId());
+            dto.setBookId(book.getSecureId());
+            dto.setCategories(categoryService.constructDTO(book.getCategories()));
+            dto.setAuthors(authorService.constructDTO(book.getAuthors()));
+            dto.setPublisher(publisherService.construcDto(book.getPublisher()));
             dto.setBookTitle(book.getTitle());
             return dto;
         }).collect(Collectors.toList());
@@ -74,7 +78,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void updateBook(Long bookId, BookUpdateRequestDTO dto) {
+    public void updateBook(String bookId, BookUpdateRequestDTO dto) {
         // get book from repository
         Book book = bookRepository.findBySecureId(bookId).orElseThrow(() -> new BadRequestException("book_id.invalid"));
         // update
@@ -85,7 +89,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook(Long bookId) {
+    public void deleteBook(String bookId) {
         Book book = bookRepository.findBySecureId(bookId).orElseThrow(() -> new BadRequestException("book_id.invalid"));
         bookRepository.delete(book);
     }
