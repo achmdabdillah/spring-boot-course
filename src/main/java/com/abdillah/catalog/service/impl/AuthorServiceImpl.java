@@ -11,6 +11,7 @@ import com.abdillah.catalog.dto.AuthorDTO.AuthorCreateRequestDTO;
 import com.abdillah.catalog.dto.AuthorDTO.AuthorResponseDTO;
 import com.abdillah.catalog.dto.AuthorDTO.AuthorUpdateRequestDTO;
 import com.abdillah.catalog.exception.BadRequestException;
+import com.abdillah.catalog.exception.ResourceNotFoundException;
 import com.abdillah.catalog.repository.AuthorRepository;
 import com.abdillah.catalog.service.AuthorService;
 
@@ -26,7 +27,7 @@ public class AuthorServiceImpl implements AuthorService {
     public AuthorResponseDTO findAuthorById(String id) {
         // 1. fetch data from database
         Author author = authorRepository.findBySecureId(id)
-                .orElseThrow(() -> new BadRequestException("Invalid authorIds"));
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid authorIds"));
         // 2. transfrom Author to authorResponseDto
         AuthorResponseDTO dto = new AuthorResponseDTO();
         dto.setAuthorName(author.getName());
